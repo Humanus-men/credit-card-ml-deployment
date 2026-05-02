@@ -1,0 +1,14 @@
+# Виртуальное окружение
+venv/
+.venv/
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Настройки PyCharm
+.idea/
+
+# Датасет (не загружаем в репозиторий)
+UCI_Credit_Card.csv
