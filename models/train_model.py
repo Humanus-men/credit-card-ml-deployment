@@ -22,7 +22,6 @@ def main():
         X, y, test_size=0.2, random_state=42, stratify=y
     )
 
-    # Разделяем признаки на категориальные (номинальные) и числовые
     nominal_features = ["SEX", "EDUCATION", "MARRIAGE"]
     numeric_features = [col for col in X.columns if col not in nominal_features]
 
@@ -34,13 +33,11 @@ def main():
         remainder="passthrough"
     )
 
-    # Модель v1: логистическая регрессия с балансировкой
     model_v1 = LogisticRegression(
         max_iter=5000,
         class_weight='balanced',
         random_state=42
     )
-    # Модель v2: случайный лес с балансировкой
     model_v2 = RandomForestClassifier(
         n_estimators=100,
         max_depth=10,
@@ -48,29 +45,23 @@ def main():
         random_state=42
     )
 
-    # Применяем препроцессор
     X_train_prep = preprocessor.fit_transform(X_train)
     X_test_prep = preprocessor.transform(X_test)
 
-    # Обучение
     model_v1.fit(X_train_prep, y_train)
     model_v2.fit(X_train_prep, y_train)
 
-    # Оценка
     print("=== Logistic Regression (v1) ===")
     print(classification_report(y_test, model_v1.predict(X_test_prep)))
 
     print("\n=== Random Forest (v2) ===")
     print(classification_report(y_test, model_v2.predict(X_test_prep)))
 
-    # Определяем корень проекта
     PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-    # Путь к папке models внутри корня проекта
     MODELS_DIR = PROJECT_ROOT / "models"
     os.makedirs(MODELS_DIR, exist_ok=True)
 
-    # Сохраняем модели и препроцессор
     with open(MODELS_DIR / "model_v1.pkl", "wb") as f:
         pickle.dump(model_v1, f)
     with open(MODELS_DIR / "model_v2.pkl", "wb") as f:
@@ -78,7 +69,6 @@ def main():
     with open(MODELS_DIR / "preprocessor.pkl", "wb") as f:
         pickle.dump(preprocessor, f)
 
-    # Сохраняем имена признаков
     feature_names = numeric_features + list(
         preprocessor.named_transformers_["cat"].get_feature_names_out(nominal_features)
     )

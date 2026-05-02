@@ -10,7 +10,6 @@ class ModelHandler:
             self.preprocessor = pickle.load(f)
 
     def preprocess(self, data: dict) -> np.ndarray:
-        # Приводим словарь к DataFrame, затем применяем сохранённый ColumnTransformer
         df = pd.DataFrame([data])
         return self.preprocessor.transform(df)
 

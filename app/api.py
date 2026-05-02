@@ -6,7 +6,7 @@ from app.model_handler import ModelHandler
 
 app = Flask(__name__)
 
-# Логирование в JSON
+
 handler = logging.StreamHandler()
 handler.setFormatter(logging.Formatter(
     '{"time":"%(asctime)s", "level":"%(levelname)s", "message":"%(message)s"}'
@@ -14,7 +14,7 @@ handler.setFormatter(logging.Formatter(
 app.logger.addHandler(handler)
 app.logger.setLevel(logging.INFO)
 
-# Корень проекта — на один уровень выше папки app/ (родительская директория для app/)
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 MODEL_V1_PATH = os.environ.get(
@@ -30,7 +30,7 @@ PREPROCESSOR_PATH = os.environ.get(
     str(PROJECT_ROOT / "models" / "preprocessor.pkl")
 )
 
-# Инициализация обработчиков
+
 model_v1 = ModelHandler(MODEL_V1_PATH, PREPROCESSOR_PATH)
 model_v2 = ModelHandler(MODEL_V2_PATH, PREPROCESSOR_PATH)
 
@@ -40,7 +40,6 @@ def log_request():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Выбор версии модели через заголовок X-Model-Version
     model_version = request.headers.get('X-Model-Version', 'v1')
     if model_version == 'v1':
         model = model_v1

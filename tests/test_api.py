@@ -7,7 +7,6 @@ def client():
     with app.test_client() as client:
         yield client
 
-# Пример данных клиента
 VALID_PAYLOAD = {
     "LIMIT_BAL": 20000, "SEX": 2, "EDUCATION": 2, "MARRIAGE": 1, "AGE": 24,
     "PAY_0": 2, "PAY_2": 2, "PAY_3": -1, "PAY_4": -1, "PAY_5": -2, "PAY_6": -2,
