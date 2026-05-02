@@ -63,13 +63,14 @@ def main():
     print("\n=== Random Forest (v2) ===")
     print(classification_report(y_test, model_v2.predict(X_test_prep)))
 
-    # Определяем корень проекта (на один уровень выше папки models/)
-    BASE_DIR = Path(__file__).resolve().parent  # models/
-    PROJECT_ROOT = BASE_DIR.parent  # корень проекта
+    # Определяем корень проекта
+    PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+    # Путь к папке models внутри корня проекта
     MODELS_DIR = PROJECT_ROOT / "models"
     os.makedirs(MODELS_DIR, exist_ok=True)
 
-    # Сохраняем по абсолютным путям
+    # Сохраняем модели и препроцессор
     with open(MODELS_DIR / "model_v1.pkl", "wb") as f:
         pickle.dump(model_v1, f)
     with open(MODELS_DIR / "model_v2.pkl", "wb") as f:
@@ -77,13 +78,14 @@ def main():
     with open(MODELS_DIR / "preprocessor.pkl", "wb") as f:
         pickle.dump(preprocessor, f)
 
+    # Сохраняем имена признаков
     feature_names = numeric_features + list(
         preprocessor.named_transformers_["cat"].get_feature_names_out(nominal_features)
     )
     with open(MODELS_DIR / "feature_names.pkl", "wb") as f:
         pickle.dump(feature_names, f)
 
-    print(f"Модели, препроцессор и имена признаков сохранены в {MODELS_DIR}")
+    print(f"Модели сохранены в {MODELS_DIR}")
 
 
 if __name__ == "__main__":

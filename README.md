@@ -24,7 +24,7 @@ credit-card-ml-deployment/
 ├── docker/                 # Docker-инфраструктура
 │   └── Dockerfile
 ├── requirements.txt
-├── docker-compose.yml      # Оркестрация (опционально)
+├── docker-compose.yml      # Оркестрация
 ├── ab_test_plan.md         # План A/B-тестирования
 ├── ARCHITECTURE.md         # Архитектурные решения и MLOps-концепты
 └── README.md
@@ -34,7 +34,7 @@ credit-card-ml-deployment/
 
 - Python 3.10 или выше
 - Docker (для контейнеризации)
-- Файл датасета `UCI_Credit_Card.csv` (не включён в репозиторий; скачайте с UCI/Kaggle и поместите в корень проекта)
+- Файл датасета `UCI_Credit_Card.csv` (не включён в репозиторий; скачайте с https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset и поместите в корень проекта)
 
 ## Локальный запуск
 
