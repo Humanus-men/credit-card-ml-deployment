@@ -15,10 +15,10 @@ credit-card-ml-deployment/
 │   └── model_handler.py    # Загрузка модели и предобработка
 ├── models/                 # Скрипт обучения и артефакты
 │   ├── train_model.py      # Обучение двух версий модели
-│   ├── model_v1.pkl        # Логистическая регрессия (после обучения)
-│   ├── model_v2.pkl        # Случайный лес (после обучения)
+│   ├── model_v1.pkl        # Логистическая регрессия
+│   ├── model_v2.pkl        # Случайный лес
 │   ├── preprocessor.pkl    # ColumnTransformer (StandardScaler + OneHotEncoder)
-│   └── feature_names.pkl   # Имена признаков после кодирования (справочно)
+│   └── feature_names.pkl   # Имена признаков после кодирования
 ├── tests/                  # Автотесты
 │   └── test_api.py
 ├── docker/                 # Docker-инфраструктура
